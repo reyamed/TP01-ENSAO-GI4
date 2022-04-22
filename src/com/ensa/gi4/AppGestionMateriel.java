@@ -7,7 +7,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.ComponentScan;
 
 @SuppressWarnings("all")
-@ComponentScan(basePackages = {"com.ensa.gi4"})
+@ComponentScan(basePackages = "com.ensa.gi4")
 public class AppGestionMateriel {
     private static final ApplicationContext APPLICATION_CONTEXT;
 
@@ -21,6 +21,5 @@ public class AppGestionMateriel {
         while (true) { // pour que l'appliation tourne jusqu'à la demande de l'utilisateur de l'arrêter
             gestionMaterielController.afficherMenu();
         }
-
     }
 }

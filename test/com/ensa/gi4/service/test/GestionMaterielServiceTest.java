@@ -27,8 +27,10 @@ public class GestionMaterielServiceTest {
     public void initGestionMaterielService()
     {
         //APPLICATION_CONTEXT = new ClassPathXmlApplicationContext("/beans/app-context.xml");
+        /*
         APPLICATION_CONTEXT = new AnnotationConfigApplicationContext(GestionMaterielServiceTest.class);
         gestionMaterielService = APPLICATION_CONTEXT.getBean(GestionMaterielServiceImpl.class);
+         */
     }
 
 

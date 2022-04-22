@@ -1,8 +1,12 @@
 package com.ensa.gi4.datatabase;
 
+import com.ensa.gi4.listeners.ApplicationPublisher;
+import com.ensa.gi4.listeners.EventType;
+import com.ensa.gi4.listeners.MyEvent;
 import com.ensa.gi4.modele.Chaise;
 import com.ensa.gi4.modele.Livre;
 import com.ensa.gi4.modele.Materiel;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -12,6 +16,10 @@ import java.util.List;
 public class MaterielDAO implements IMaterielDAO {
 
     private static MaterielDAO singleton = new MaterielDAO();
+
+    @Autowired
+    ApplicationPublisher publisher;
+
 
     public static MaterielDAO getInstance(){
         return singleton;
@@ -93,6 +101,7 @@ public class MaterielDAO implements IMaterielDAO {
     @Override
     public void addMateriel(Materiel materiel) {
         this.materiels.add(materiel);
+        publisher.publish(new MyEvent<>(materiel, EventType.ADD));
     }
 
     @Override
@@ -106,12 +115,10 @@ public class MaterielDAO implements IMaterielDAO {
                 materielToDelete = materiel;
                 break;
             }
-
-
         }
 
         this.materiels.remove(materielToDelete);
-
+        publisher.publish(new MyEvent<>(materielToDelete, EventType.REMOVE));
     }
 
     @Override
@@ -142,5 +149,6 @@ public class MaterielDAO implements IMaterielDAO {
 
         }
         materielToUpdate.setName(materiel.getName());
+        publisher.publish(new MyEvent<>(materielToUpdate, EventType.UPDATE));
     }
 }
